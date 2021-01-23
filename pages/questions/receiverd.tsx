@@ -27,7 +27,7 @@ export default function QuestionReceived() {
   /**
    * スナップショットからデータを更新
    */
-  function appendQuestions(snapshot: firebase.firestore.QuerySnapshot<firebase.firestore.DOcumentData>) {
+  function appendQuestions(snapshot: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>) {
     const gotQuestions = snapshot.docs.map(doc => {
       const question = doc.data() as Question;
       question.id = doc.id;
