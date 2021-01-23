@@ -1,7 +1,8 @@
 # Next.js + TypeScript + Firebaseで質問箱をつくる
 
-この記事を参考にする  
+この記事を参考に勉強したこと  
 https://zenn.dev/dala/books/nextjs-firebase-service  
+めっちゃ勉強になった
 
 ## 学んだこと
 
@@ -47,3 +48,21 @@ http://localhost:3000/api/answers/fNC706Kemj6TeKSXPRHa
 
 作ったAPIでページを作る時に`getServerSideProps`でAPIを叩いてその結果をpropsに渡してページを作る  
 
+### OGP用の画像を動的に生成する
+
+フォントはライセンスがあるためサーバーに入っているデフォルトの文字とかは避けた方が良いらしい。  
+ライセンス的に問題のないフォントをサーバーにインストールしてそれを使うようにする。  
+
+画像の作り方自体は`canvas（node-canvas）`を使ってフロント側で画像を作るのと同じ感じで作る。  
+その中に必要なデータなどはfirebaseなどからひっぱてくる。  
+nextのルーティングを使えるので`pages/api/answer/[id]/ogp.ts`などを作ってそこで動かす  
+
+本番で動かすためにはnode-canvasを動かすためのライブラリをプロジェクトに置いておく必要があるらしい（canvas_lib64というディレクトリで中身はhttps://github.com/jwerre/node-canvas-lambda/raw/master/node12_canvas_lib64_layer.zip）  
+package.jsonにも
+
+```
+"now-build": "cp canvas_lib64/*so.1 node_modules/canvas/build/Release/ && yarn build"
+```
+
+を追加するらしい。
+これらがうまく動けばURLで画像を生成できるようになるので、SSRでmetaが書き換わるように設定すればおK
