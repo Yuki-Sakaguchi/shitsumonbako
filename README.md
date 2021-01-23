@@ -35,3 +35,15 @@ Reduxより簡単そうだった。
 
 ２箇所のデータを変更するときなどには`runTransaction`を使う。  
 2つ以上のデータ操作がどっちもいい感じに生合成を保ってくれる。
+
+### サーバー側でFirebaseを使うためにはFirebase-adminを使う
+
+秘密鍵をFirebaseの管理画面で作れるのでそれを使う  
+これがバレると情報が漏洩しちゃうのでコミットしないようにする  
+base64に変換した文字を環境変数に入れて使う。  
+ブラウザ側に出ないように`NEXT_PUBLIC_`はつけない。  
+↓こんな感じでアクセスできる  
+http://localhost:3000/api/answers/fNC706Kemj6TeKSXPRHa  
+
+作ったAPIでページを作る時に`getServerSideProps`でAPIを叩いてその結果をpropsに渡してページを作る  
+
